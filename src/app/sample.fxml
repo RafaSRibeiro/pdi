@@ -47,6 +47,27 @@
         </Accordion>
     </left>
    <top>
-      <Pane prefHeight="70.0" prefWidth="636.0" BorderPane.alignment="CENTER" />
+      <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
    </top>
+   <center>
+      <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <VBox prefHeight="800.0" prefWidth="250.0">
+               <children>
+                  <Button alignment="TOP_LEFT" mnemonicParsing="false" text="Button" />
+               </children>
+            </VBox>
+            <VBox prefHeight="800.0" prefWidth="250.0">
+               <children>
+                  <Button mnemonicParsing="false" text="Button" />
+               </children>
+            </VBox>
+            <VBox prefHeight="800.0" prefWidth="250.0">
+               <children>
+                  <Button mnemonicParsing="false" text="Button" />
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+   </center>
 </BorderPane>
