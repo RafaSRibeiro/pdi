@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="744.0" prefWidth="1114.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="875.0" prefWidth="1270.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.Controller">
     <left>
         <Accordion BorderPane.alignment="CENTER">
             <panes>
@@ -44,30 +47,131 @@
                     </content>
                 </TitledPane>
             </panes>
+         <padding>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </padding>
         </Accordion>
     </left>
    <top>
-      <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+      <HBox>
+         <children>
+            <HBox prefHeight="39.0" prefWidth="1114.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Label contentDisplay="CENTER" text="PDI" textAlignment="CENTER">
+                     <padding>
+                        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                     </padding>
+                     <font>
+                        <Font name="System Bold" size="33.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="50.0" />
+                     </HBox.margin>
+                  </Label>
+                  <Label id="redLabel" fx:id="redLabel" contentDisplay="CENTER" text="Red" textAlignment="CENTER" textFill="RED">
+                     <padding>
+                        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                     </padding>
+                     <font>
+                        <Font name="System Bold" size="33.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="50.0" />
+                     </HBox.margin>
+                  </Label>
+                  <Label id="greeLabel" fx:id="greenLabel" contentDisplay="CENTER" text="Green" textAlignment="CENTER" textFill="#0bd301">
+                     <padding>
+                        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                     </padding>
+                     <font>
+                        <Font name="System Bold" size="33.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="50.0" />
+                     </HBox.margin>
+                  </Label>
+                  <Label id="blueLabel" fx:id="blueLabel" contentDisplay="CENTER" text="Blue" textAlignment="CENTER" textFill="#1060e0">
+                     <padding>
+                        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                     </padding>
+                     <font>
+                        <Font name="System Bold" size="33.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="50.0" />
+                     </HBox.margin>
+                  </Label>
+               </children>
+            </HBox>
+         </children>
+      </HBox>
    </top>
    <center>
-      <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+      <HBox BorderPane.alignment="CENTER">
          <children>
-            <VBox prefHeight="800.0" prefWidth="250.0">
+            <VBox prefHeight="1000.0" prefWidth="500.0">
                <children>
-                  <Button alignment="TOP_LEFT" mnemonicParsing="false" text="Button" />
+                  <Button alignment="TOP_LEFT" mnemonicParsing="false" onAction="#openImageAction" text="Button">
+                     <VBox.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </VBox.margin></Button>
+                  <ScrollPane prefHeight="1000.0" prefWidth="500.0">
+                    <content>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0">
+                           <children>
+                              <ImageView id="imageView1" fx:id="imageView1" fitHeight="219.0" fitWidth="225.0" onMouseMoved="#rasterImage" pickOnBounds="true" preserveRatio="true" />
+                           </children>
+                        </AnchorPane>
+                    </content>
+                  </ScrollPane>
                </children>
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
             </VBox>
-            <VBox prefHeight="800.0" prefWidth="250.0">
+            <VBox prefHeight="1000.0" prefWidth="500.0">
                <children>
-                  <Button mnemonicParsing="false" text="Button" />
+                  <Button mnemonicParsing="false" text="Button">
+                     <VBox.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </VBox.margin></Button>
+                  <ScrollPane prefHeight="1000.0" prefWidth="500.0">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0">
+                           <children>
+                              <ImageView id="imageView2" fx:id="imageView2" fitHeight="219.0" fitWidth="225.0" onMouseMoved="#rasterImage" pickOnBounds="true" preserveRatio="true" />
+                           </children>
+                        </AnchorPane>
+                     </content>
+                  </ScrollPane>
                </children>
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
             </VBox>
-            <VBox prefHeight="800.0" prefWidth="250.0">
+            <VBox prefHeight="1000.0" prefWidth="500.0">
                <children>
-                  <Button mnemonicParsing="false" text="Button" />
+                  <ScrollPane prefHeight="1000.0" prefWidth="500.0">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0">
+                           <children>
+                              <ImageView id="imageView3" fx:id="imageView3" fitHeight="219.0" fitWidth="225.0" onMouseMoved="#rasterImage" pickOnBounds="true" preserveRatio="true" />
+                           </children>
+                        </AnchorPane>
+                     </content>
+                     <VBox.margin>
+                        <Insets top="45.0" />
+                     </VBox.margin>
+                  </ScrollPane>
                </children>
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
             </VBox>
          </children>
       </HBox>
    </center>
+   <bottom>
+      <ToolBar prefHeight="20.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+   </bottom>
 </BorderPane>
