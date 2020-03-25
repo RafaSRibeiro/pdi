@@ -13,17 +13,77 @@
             <panes>
                 <TitledPane animated="false" text="Tons de Cinza">
                     <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <Button mnemonicParsing="false" onAction="#grayScale" text="Media Aritmetica">
+                                 <VBox.margin>
+                                    <Insets left="10.0" top="15.0" />
+                                 </VBox.margin></Button>
+                              <Label text="\%Red">
+                                 <VBox.margin>
+                                    <Insets left="10.0" top="15.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <TextField fx:id="txRed" text="50">
+                                 <VBox.margin>
+                                    <Insets left="10.0" top="5.0" />
+                                 </VBox.margin>
+                              </TextField>
+                              <Label text="\%Green">
+                                 <VBox.margin>
+                                    <Insets left="10.0" top="15.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <TextField fx:id="txGreen" text="50">
+                                 <VBox.margin>
+                                    <Insets left="10.0" top="5.0" />
+                                 </VBox.margin>
+                              </TextField>
+                              <Label text="\%Blue">
+                                 <VBox.margin>
+                                    <Insets left="10.0" top="15.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <TextField fx:id="txBlue" text="50">
+                                 <VBox.margin>
+                                    <Insets left="10.0" top="5.0" />
+                                 </VBox.margin>
+                              </TextField>
+                              <Button mnemonicParsing="false" onAction="#weightedGrayScale" text="Media Aritmetica">
+                                 <VBox.margin>
+                                    <Insets left="10.0" top="15.0" />
+                                 </VBox.margin>
+                              </Button>
+                           </children>
+                        </VBox>
+                     </children></AnchorPane>
                     </content>
                 </TitledPane>
                 <TitledPane animated="false" text="Limiarização">
                     <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <VBox layoutX="9.0" layoutY="7.0" prefHeight="288.0" prefWidth="188.0">
+                           <children>
+                              <Slider fx:id="threshold" max="250.0" prefHeight="38.0" prefWidth="141.0" showTickLabels="true" showTickMarks="true" />
+                              <Button mnemonicParsing="false" onAction="#thresholdSliderChanged" text="Aplicar Limiarizaçao" />
+                           </children>
+                        </VBox>
+                     </children></AnchorPane>
                     </content>
                 </TitledPane>
                 <TitledPane animated="false" text="Negativa">
                     <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <VBox layoutX="14.0" layoutY="14.0" prefHeight="228.0" prefWidth="182.0">
+                           <children>
+                              <Button mnemonicParsing="false" onAction="#negative" text="Negativar" />
+                           </children>
+                        </VBox>
+                     </children></AnchorPane>
                     </content>
                 </TitledPane>
                 <TitledPane animated="false" text="Adição / Subtração">
@@ -111,7 +171,7 @@
          <children>
             <VBox prefHeight="1000.0" prefWidth="500.0">
                <children>
-                  <Button alignment="TOP_LEFT" mnemonicParsing="false" onAction="#openImageAction" text="Button">
+                  <Button alignment="TOP_LEFT" mnemonicParsing="false" onAction="#openImageAction" text="Abrir Imagem">
                      <VBox.margin>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </VBox.margin></Button>
@@ -119,7 +179,7 @@
                     <content>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0">
                            <children>
-                              <ImageView id="imageView1" fx:id="imageView1" fitHeight="219.0" fitWidth="225.0" onMouseMoved="#rasterImage" pickOnBounds="true" preserveRatio="true" />
+                              <ImageView id="imageView1" fx:id="imageView1" fitHeight="219.0" fitWidth="225.0" onMouseMoved="#rasterImage" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                            </children>
                         </AnchorPane>
                     </content>
@@ -139,7 +199,7 @@
                      <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0">
                            <children>
-                              <ImageView id="imageView2" fx:id="imageView2" fitHeight="219.0" fitWidth="225.0" onMouseMoved="#rasterImage" pickOnBounds="true" preserveRatio="true" />
+                              <ImageView id="imageView2" fx:id="imageView2" fitHeight="219.0" fitWidth="225.0" onMouseMoved="#rasterImage" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                            </children>
                         </AnchorPane>
                      </content>
@@ -155,7 +215,7 @@
                      <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0">
                            <children>
-                              <ImageView id="imageView3" fx:id="imageView3" fitHeight="219.0" fitWidth="225.0" onMouseMoved="#rasterImage" pickOnBounds="true" preserveRatio="true" />
+                              <ImageView id="imageView3" fx:id="imageView3" fitHeight="219.0" fitWidth="225.0" onMouseMoved="#rasterImage" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                            </children>
                         </AnchorPane>
                      </content>

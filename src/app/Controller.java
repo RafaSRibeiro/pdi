@@ -1,7 +1,13 @@
 package app;
 
+import filters.GrayScale;
+import filters.Negative;
+import filters.Threshold;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
+import javafx.scene.control.Slider;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -30,6 +36,18 @@ public class Controller {
     @FXML
     Label blueLabel;
 
+    @FXML
+    TextField txRed;
+
+    @FXML
+    TextField txGreen;
+
+    @FXML
+    TextField txBlue;
+
+    @FXML
+    Slider thresholdSlider;
+
     private Image image1;
 
     private Image image2;
@@ -38,7 +56,7 @@ public class Controller {
 
     @FXML
     public void openImageAction() {
-        openImage(imageView1, image1);
+        image1 = openImage(imageView1, image1);
     }
 
     @FXML
@@ -49,13 +67,57 @@ public class Controller {
         }
     }
 
+    @FXML
+    public void grayScale() {
+        applyFilter(GrayScale.ArithmeticAverage(image1));
+    }
+
+    @FXML
+    public void weightedGrayScale() {
+        try {
+            int r = Integer.parseInt(txRed.getText());
+            int g = Integer.parseInt(txGreen.getText());
+            int b = Integer.parseInt(txBlue.getText());
+            if ((r + g + b) > 100 || r == 0 || g == 0 || b == 0) {
+                alert("Verifique os valores de R - G - B para escala de cinza, deve ter total de 100%.", Alert.AlertType.ERROR);
+            } else {
+                applyFilter(GrayScale.PercentageAverage(image1, r, g, b));
+            }
+        } catch (Exception e) {
+            alert("Verifique os valores de R - G - B", Alert.AlertType.ERROR);
+        }
+    }
+
+    @FXML
+    public void thresholdSliderChanged() {
+        applyFilter(Threshold.threshold(image1, thresholdSlider.getValue() / 255));
+    };
+
+    @FXML
+    public void negative() {
+        applyFilter(Negative.negative(image1));
+    }
+
+    public void applyFilter(Image image) {
+        try {
+            image3 = image;
+            int width = (int) image3.getWidth();
+            int height = (int) image3.getHeight();
+            imageView3.setImage(image);
+            imageView3.setFitHeight(height);
+            imageView3.setFitWidth(width);
+        } catch (Exception e) {
+            alert("Erro no filtro escolhido.", Alert.AlertType.ERROR);
+        }
+    }
+
     private void updateImage3() {
         imageView3.setImage(image3);
         imageView3.setFitHeight(image3.getHeight());
         imageView3.setFitWidth(image3.getWidth());
     }
 
-    private void openImage(ImageView imageView, Image image) {
+    private Image openImage(ImageView imageView, Image image) {
         File file = selectImage();
         if (file != null) {
             image = new Image(file.toURI().toString());
@@ -63,6 +125,7 @@ public class Controller {
             imageView.setFitHeight(image.getHeight());
             imageView.setFitWidth(image.getWidth());
         }
+        return image;
     }
 
     private File selectImage() {
@@ -78,7 +141,15 @@ public class Controller {
             greenLabel.setText("G: " + (int) color.getGreen() * 255);
             blueLabel.setText("B: " + (int) color.getBlue() * 255);
         } catch (IndexOutOfBoundsException e) {
-
+            System.out.println(e.getMessage());
         }
+    }
+
+    private void alert(String mensagem, Alert.AlertType tipo) {
+        Alert alert = new Alert(tipo);
+        alert.setTitle("Alerta");
+        alert.setHeaderText("");
+        alert.setContentText(mensagem);
+        alert.showAndWait();
     }
 }
