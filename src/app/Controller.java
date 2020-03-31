@@ -1,13 +1,8 @@
 package app;
 
-import filters.GrayScale;
-import filters.Negative;
-import filters.Threshold;
+import filters.*;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Label;
-import javafx.scene.control.Slider;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -47,6 +42,15 @@ public class Controller {
 
     @FXML
     Slider thresholdSlider;
+
+    @FXML
+    RadioButton radioX;
+
+    @FXML
+    RadioButton radio3X3;
+
+    @FXML
+    RadioButton radioCross;
 
     private Image image1;
 
@@ -96,6 +100,12 @@ public class Controller {
     @FXML
     public void negative() {
         applyFilter(Negative.negative(image1));
+        image1 = image3;
+    }
+
+    @FXML
+    public void noise() {
+        applyFilter(Noise.noises(image1, noiseType()));
     }
 
     public void applyFilter(Image image) {
@@ -152,4 +162,13 @@ public class Controller {
         alert.setContentText(mensagem);
         alert.showAndWait();
     }
+
+    private int noiseType() {
+        if (radio3X3.isSelected())
+            return Utils.VIZINHOS_3x3;
+        if (radioCross.isSelected())
+            return Utils.VIZINHOS_CROSS;
+        return Utils.VIZINHOS_X;
+    }
+
 }
