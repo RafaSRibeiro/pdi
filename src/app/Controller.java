@@ -1,6 +1,8 @@
 package app;
 
 import filters.*;
+import javafx.embed.swing.SwingFXUtils;
+import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
@@ -9,6 +11,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
 import java.io.File;
 
 public class Controller {
@@ -52,15 +56,57 @@ public class Controller {
     @FXML
     RadioButton radioCross;
 
+    @FXML
+    Slider sliderPercentAdditionSubtractionImage;
+
+    double percentAdditionSubtractionImage1 = 50;
+
+    double percentAdditionSubtractionImage2 = 50;
+
     private Image image1;
 
     private Image image2;
 
     private Image image3;
 
+    private int pressedX;
+
+    private int pressedY;
+
+    private int releasedX;
+
+    private int releasedY;
+
+    @FXML
+    public void imagePressed(MouseEvent evento) {
+        ImageView imageView = (ImageView) evento.getTarget();
+        if (imageView.getImage() != null) {
+            pressedX = (int) evento.getX();
+            pressedY = (int) evento.getY();
+        }
+
+    }
+
+    @FXML
+    public void imageReleased(MouseEvent evento) {
+        ImageView imageView = (ImageView) evento.getTarget();
+        Image image = imageView.getImage();
+        if (imageView.getImage() != null) {
+            releasedX = (int) evento.getX();
+            releasedY = (int) evento.getY();
+            imageView.setImage(Draw.square(image, pressedX, pressedY, releasedX, releasedY));
+        }
+
+    }
+
     @FXML
     public void openImageAction() {
         image1 = openImage(imageView1, image1);
+    }
+
+    @FXML
+    public void openImage2Action() {
+        image2 = openImage(imageView2, image2);
     }
 
     @FXML
@@ -95,7 +141,9 @@ public class Controller {
     @FXML
     public void thresholdSliderChanged() {
         applyFilter(Threshold.threshold(image1, thresholdSlider.getValue() / 255));
-    };
+    }
+
+    ;
 
     @FXML
     public void negative() {
@@ -118,6 +166,51 @@ public class Controller {
             imageView3.setFitWidth(width);
         } catch (Exception e) {
             alert("Erro no filtro escolhido.", Alert.AlertType.ERROR);
+        }
+    }
+
+    @FXML
+    public void additionSubtractionUpdate() {
+        percentAdditionSubtractionImage1 = sliderPercentAdditionSubtractionImage.getValue();
+        percentAdditionSubtractionImage2 = 100 - percentAdditionSubtractionImage1;
+    }
+
+    @FXML
+    public void addition() {
+        try {
+            additionSubtractionUpdate();
+            applyFilter(AdditionSubtraction.addition(image1, image2, percentAdditionSubtractionImage1, percentAdditionSubtractionImage2));
+        } catch (Exception e) {
+            alert("Erro no filtro escolhido.", Alert.AlertType.ERROR);
+        }
+    }
+
+    @FXML
+    public void subtraction() {
+        try {
+            additionSubtractionUpdate();
+            applyFilter(AdditionSubtraction.subtraction(image1, image2, percentAdditionSubtractionImage1, percentAdditionSubtractionImage2));
+        } catch (Exception e) {
+            alert("Erro no filtro escolhido.", Alert.AlertType.ERROR);
+        }
+    }
+
+    @FXML
+    public void postImage() {
+        if (image3 != null) {
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.getExtensionFilters().add(
+                    new FileChooser.ExtensionFilter("Image", "*.png")
+            );
+            File file = fileChooser.showSaveDialog(null);
+            if (file != null) {
+                BufferedImage bufferedImage = SwingFXUtils.fromFXImage(image3, null);
+                try {
+                    ImageIO.write(bufferedImage, "PNG", file);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
         }
     }
 
