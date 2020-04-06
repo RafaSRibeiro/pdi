@@ -96,7 +96,6 @@ public class Controller {
             releasedY = (int) evento.getY();
             imageView.setImage(Draw.square(image, pressedX, pressedY, releasedX, releasedY));
         }
-
     }
 
     @FXML
@@ -119,7 +118,7 @@ public class Controller {
 
     @FXML
     public void grayScale() {
-        applyFilter(GrayScale.ArithmeticAverage(image1));
+        applyFilter(GrayScale.ArithmeticAverage(imageView1.getImage()));
     }
 
     @FXML
@@ -131,7 +130,7 @@ public class Controller {
             if ((r + g + b) > 100 || r == 0 || g == 0 || b == 0) {
                 alert("Verifique os valores de R - G - B para escala de cinza, deve ter total de 100%.", Alert.AlertType.ERROR);
             } else {
-                applyFilter(GrayScale.PercentageAverage(image1, r, g, b));
+                applyFilter(GrayScale.PercentageAverage(imageView1.getImage(), r, g, b));
             }
         } catch (Exception e) {
             alert("Verifique os valores de R - G - B", Alert.AlertType.ERROR);
@@ -140,20 +139,20 @@ public class Controller {
 
     @FXML
     public void thresholdSliderChanged() {
-        applyFilter(Threshold.threshold(image1, thresholdSlider.getValue() / 255));
+        applyFilter(Threshold.threshold(imageView1.getImage(), thresholdSlider.getValue() / 255));
     }
 
     ;
 
     @FXML
     public void negative() {
-        applyFilter(Negative.negative(image1));
+        applyFilter(Negative.negative(imageView1.getImage()));
         image1 = image3;
     }
 
     @FXML
     public void noise() {
-        applyFilter(Noise.noises(image1, noiseType()));
+        applyFilter(Noise.noises(imageView1.getImage(), noiseType()));
     }
 
     public void applyFilter(Image image) {
@@ -171,15 +170,15 @@ public class Controller {
 
     @FXML
     public void additionSubtractionUpdate() {
-        percentAdditionSubtractionImage1 = sliderPercentAdditionSubtractionImage.getValue();
-        percentAdditionSubtractionImage2 = 100 - percentAdditionSubtractionImage1;
+        percentAdditionSubtractionImage2 = sliderPercentAdditionSubtractionImage.getValue();
+        percentAdditionSubtractionImage1 = 100 - percentAdditionSubtractionImage2;
     }
 
     @FXML
     public void addition() {
         try {
             additionSubtractionUpdate();
-            applyFilter(AdditionSubtraction.addition(image1, image2, percentAdditionSubtractionImage1, percentAdditionSubtractionImage2));
+            applyFilter(AdditionSubtraction.addition(imageView1.getImage(), imageView2.getImage(), percentAdditionSubtractionImage1, percentAdditionSubtractionImage2));
         } catch (Exception e) {
             alert("Erro no filtro escolhido.", Alert.AlertType.ERROR);
         }
@@ -189,7 +188,7 @@ public class Controller {
     public void subtraction() {
         try {
             additionSubtractionUpdate();
-            applyFilter(AdditionSubtraction.subtraction(image1, image2, percentAdditionSubtractionImage1, percentAdditionSubtractionImage2));
+            applyFilter(AdditionSubtraction.subtraction(imageView1.getImage(), imageView2.getImage(), percentAdditionSubtractionImage1, percentAdditionSubtractionImage2));
         } catch (Exception e) {
             alert("Erro no filtro escolhido.", Alert.AlertType.ERROR);
         }
@@ -212,12 +211,6 @@ public class Controller {
                 }
             }
         }
-    }
-
-    private void updateImage3() {
-        imageView3.setImage(image3);
-        imageView3.setFitHeight(image3.getHeight());
-        imageView3.setFitWidth(image3.getWidth());
     }
 
     private Image openImage(ImageView imageView, Image image) {
