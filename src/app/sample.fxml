@@ -221,6 +221,11 @@
                         <Insets left="50.0" />
                      </HBox.margin>
                   </Label>
+                  <Button alignment="TOP_LEFT" mnemonicParsing="false" onAction="#openHistogram" text="Histogram">
+                     <HBox.margin>
+                        <Insets left="100.0" top="20.0" />
+                     </HBox.margin>
+                  </Button>
                </children>
             </HBox>
          </children>

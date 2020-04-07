@@ -1,19 +1,31 @@
 package app;
 
+import com.sun.marlin.stats.Histogram;
 import filters.*;
+import histogram.HistogramController;
 import javafx.embed.swing.SwingFXUtils;
+import javafx.event.ActionEvent;
 import javafx.event.EventType;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.chart.BarChart;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
 
 public class Controller {
 
@@ -213,6 +225,41 @@ public class Controller {
         }
     }
 
+    @FXML
+    public void openHistogram(ActionEvent actionEvent) throws IOException {
+        Stage stage = new Stage();
+        FXMLLoader loader = new FXMLLoader((getClass().getResource("../histogram/histogram.fxml")));
+        Parent parent = loader.load();
+        stage.setScene(new Scene(parent));
+        stage.setTitle("Histogram");
+        stage.initModality(Modality.WINDOW_MODAL);
+        stage.initOwner(((Node) actionEvent.getSource()).getScene().getWindow());
+        stage.show();
+
+        HistogramController histogramController = (HistogramController) loader.getController();
+
+        if (image1 != null)
+            histogramGenerator(image1, histogramController.graph1);
+        if (image2 != null)
+            histogramGenerator(image2, histogramController.graph2);
+        if (image3 != null)
+            histogramGenerator(image3, histogramController.graph3);
+    }
+
+    private void histogramGenerator(Image image, BarChart barChart) {
+        int[] values = filters.Histogram.histogram(image);
+
+        XYChart.Series series = new XYChart.Series();
+        for (int i = 0; i < values.length; i++) {
+            series.getData().add(new XYChart.Data(String.valueOf(i), values[i]));
+        }
+        barChart.getData().addAll(series);
+
+//        for(Node node: barChart.lookupAll(".default-color0.chart-bar")) {
+//            node.setStyle("-fx-bar-fill: red;");
+//        }
+    }
+
     private Image openImage(ImageView imageView, Image image) {
         File file = selectImage();
         if (file != null) {
@@ -233,9 +280,9 @@ public class Controller {
     private void updateColorStatus(Image image, int x, int y) {
         try {
             Color color = image.getPixelReader().getColor(x, y);
-            redLabel.setText("R: " + (int) color.getRed() * 255);
-            greenLabel.setText("G: " + (int) color.getGreen() * 255);
-            blueLabel.setText("B: " + (int) color.getBlue() * 255);
+            redLabel.setText("R: " + (int) Math.round(color.getRed() * 255));
+            greenLabel.setText("G: " + (int) Math.round(color.getGreen() * 255));
+            blueLabel.setText("B: " + (int) Math.round(color.getBlue() * 255));
         } catch (IndexOutOfBoundsException e) {
             System.out.println(e.getMessage());
         }
