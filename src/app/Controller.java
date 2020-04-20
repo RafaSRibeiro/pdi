@@ -1,6 +1,5 @@
 package app;
 
-import com.sun.marlin.stats.Histogram;
 import filters.*;
 import histogram.HistogramController;
 import javafx.embed.swing.SwingFXUtils;
@@ -246,8 +245,18 @@ public class Controller {
             histogramGenerator(image3, histogramController.graph3);
     }
 
+    @FXML
+    public void histogramValidPixels() {
+        applyFilter(Histogram.histogramEquilize(imageView1.getImage(), false));
+    }
+
+    @FXML
+    public void histogramAllPixels() {
+        applyFilter(Histogram.histogramEquilize(imageView1.getImage(), true));
+    }
+
     private void histogramGenerator(Image image, BarChart barChart) {
-        int[] values = filters.Histogram.histogram(image);
+        int[] values = filters.Histogram.histogram(image, Histogram.ALL);
 
         XYChart.Series series = new XYChart.Series();
         for (int i = 0; i < values.length; i++) {
