@@ -21,6 +21,11 @@
                                  <VBox.margin>
                                     <Insets left="10.0" top="15.0" />
                                  </VBox.margin></Button>
+                              <Separator prefWidth="200.0">
+                                 <VBox.margin>
+                                    <Insets top="10.0" />
+                                 </VBox.margin>
+                              </Separator>
                               <Label text="\%Red">
                                  <VBox.margin>
                                     <Insets left="10.0" top="15.0" />
@@ -51,7 +56,7 @@
                                     <Insets left="10.0" top="5.0" />
                                  </VBox.margin>
                               </TextField>
-                              <Button mnemonicParsing="false" onAction="#weightedGrayScale" text="Media Aritmetica">
+                              <Button mnemonicParsing="false" onAction="#weightedGrayScale" text="Media Ponderada">
                                  <VBox.margin>
                                     <Insets left="10.0" top="15.0" />
                                  </VBox.margin>
@@ -67,7 +72,7 @@
                      <children>
                         <VBox alignment="TOP_CENTER" layoutX="9.0" layoutY="7.0" prefHeight="288.0" prefWidth="188.0">
                            <children>
-                              <Slider fx:id="threshold" max="250.0" prefHeight="38.0" prefWidth="141.0" showTickLabels="true" showTickMarks="true" />
+                              <Slider fx:id="thresholdSlider" max="255.0" prefHeight="38.0" prefWidth="141.0" showTickLabels="true" showTickMarks="true" />
                               <Button mnemonicParsing="false" onAction="#thresholdSliderChanged" text="Aplicar Limiarizaçao" />
                            </children>
                         </VBox>

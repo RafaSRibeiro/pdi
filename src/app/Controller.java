@@ -138,7 +138,7 @@ public class Controller {
             int r = Integer.parseInt(txRed.getText());
             int g = Integer.parseInt(txGreen.getText());
             int b = Integer.parseInt(txBlue.getText());
-            if ((r + g + b) > 100 || r == 0 || g == 0 || b == 0) {
+            if ((r + g + b) != 100) {
                 alert("Verifique os valores de R - G - B para escala de cinza, deve ter total de 100%.", Alert.AlertType.ERROR);
             } else {
                 applyFilter(GrayScale.PercentageAverage(imageView1.getImage(), r, g, b));
@@ -151,9 +151,7 @@ public class Controller {
     @FXML
     public void thresholdSliderChanged() {
         applyFilter(Threshold.threshold(imageView1.getImage(), thresholdSlider.getValue() / 255));
-    }
-
-    ;
+    };
 
     @FXML
     public void negative() {
