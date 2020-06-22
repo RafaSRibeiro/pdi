@@ -4,7 +4,6 @@ import filters.*;
 import histogram.HistogramController;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
-import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -25,6 +24,7 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 
 public class Controller {
 
@@ -59,6 +59,9 @@ public class Controller {
     Slider thresholdSlider;
 
     @FXML
+    Slider thresholdResemblance;
+
+    @FXML
     RadioButton radioX;
 
     @FXML
@@ -66,6 +69,15 @@ public class Controller {
 
     @FXML
     RadioButton radioCross;
+
+    @FXML
+    RadioButton radioFerrugem;
+
+    @FXML
+    RadioButton radioCercosporiose;
+
+    @FXML
+    RadioButton radioPlantaSadia;
 
     @FXML
     Slider sliderPercentAdditionSubtractionImage;
@@ -79,6 +91,8 @@ public class Controller {
     private Image image2;
 
     private Image image3;
+
+    private Image imageSemelhante;
 
     private int pressedX;
 
@@ -151,6 +165,11 @@ public class Controller {
     @FXML
     public void thresholdSliderChanged() {
         applyFilter(Threshold.threshold(imageView1.getImage(), thresholdSlider.getValue() / 255));
+    };
+
+    @FXML
+    public void thresholdSliderChangedRGB() {
+        applyFilter(Threshold.thresholdRGB(imageView1.getImage(), imageSemelhante, thresholdResemblance.getValue() / 255));
     };
 
     @FXML
@@ -251,6 +270,12 @@ public class Controller {
     @FXML
     public void histogramAllPixels() {
         applyFilter(Histogram.histogramEquilize(imageView1.getImage(), true));
+    }
+
+    @FXML
+    public void openImageSemelhanca() {
+        File file = selectImage();
+        imageSemelhante = new Image(file.toURI().toString());
     }
 
     private void histogramGenerator(Image image, BarChart barChart) {

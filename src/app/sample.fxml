@@ -70,10 +70,21 @@
                     <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <VBox alignment="TOP_CENTER" layoutX="9.0" layoutY="7.0" prefHeight="288.0" prefWidth="188.0">
+                        <VBox layoutX="9.0" layoutY="7.0" prefHeight="288.0" prefWidth="188.0">
                            <children>
                               <Slider fx:id="thresholdSlider" max="255.0" prefHeight="38.0" prefWidth="141.0" showTickLabels="true" showTickMarks="true" />
-                              <Button mnemonicParsing="false" onAction="#thresholdSliderChanged" text="Aplicar Limiarizaçao" />
+                              <Button mnemonicParsing="false" onAction="#thresholdSliderChanged" text="Aplicar Limiarizaçao">
+                                 <VBox.margin>
+                                    <Insets bottom="50.0" />
+                                 </VBox.margin></Button>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Similaridade" />
+                              <Slider fx:id="thresholdResemblance" max="255.0" prefHeight="38.0" prefWidth="141.0" showTickLabels="true" showTickMarks="true" />
+                              <Button mnemonicParsing="false" onAction="#openImageSemelhanca" text="Imagem Semelhante" />
+                              <Button mnemonicParsing="false" onAction="#thresholdSliderChangedRGB" text="Aplicar Limiarizaçao">
+                                 <VBox.margin>
+                                    <Insets top="20.0" />
+                                 </VBox.margin>
+                              </Button>
                            </children>
                         </VBox>
                      </children></AnchorPane>
